@@ -1,0 +1,27 @@
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+
+cinst console-devel
+cinst sublimetext2
+cinst notepadplusplus
+
+cinst IIS-WebServerRole -source windowsfeatures
+cinst Net-Framework -source windowsfeatures
+cinst Web-Common-Http -source windowsfeatures
+cinst Web-Static-Content -source windowsfeatures
+cinst Web-Default-Doc -source windowsfeatures
+cinst Web-Dir-Browsing -source windowsfeatures
+cinst Web-Http-Redirect -source windowsfeatures
+cinst Web-Asp-Net -source windowsfeatures
+cinst Web-ASP -source windowsfeatures
+cinst Web-Basic-Auth -source windowsfeatures
+cinst Web-Digest-Auth -source windowsfeatures
+cinst Web-Stat-Compression -source windowsfeatures
+cinst Web-Dyn-Compression -source windowsfeatures
+cinst Web-Windows-Auth -source windowsfeatures
+cinst Web-Mgmt-Tools -source windowsfeatures
+cinst Web-Mgmt-Console -source windowsfeatures
+cinst MSMQ -source windowsfeatures
+cinst MSMQ-Directory -source windowsfeatures
+cinst Web-Url-Auth -source windowsfeatures
+cinst NET-HTTP-Activation -source windowsfeatures
+cinst Web-Asp-Net45 -source windowsfeatures
