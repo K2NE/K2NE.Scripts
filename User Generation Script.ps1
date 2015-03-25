@@ -1,0 +1,32 @@
+# Use at own risk :)
+# On Denallix, make a 'BulkUsers' OU. Then run the below - should be enough.
+
+import-module ActiveDirectory
+
+
+for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
+    $ouName = "BulkUsers" + $ouCount.ToString("0000")
+    $lastGroup = "";
+    New-ADOrganizationalUnit -Name $ouName -Path "OU=BulkUsers,DC=DENALLIX,DC=COM" -ProtectedFromAccidentalDeletion $false
+    $ouPath = "OU="+$ouName+",OU=BulkUsers,DC=DENALLIX,DC=COM";
+    Write-Host "Added OU " $ouName
+    if ($ouCount % 10 -eq 0)
+    {
+        $groupName = "BulkGroup" + ($ouCount / 10).ToString("00");
+        $groupDesc = "Group for OU " + $ouName;
+        New-ADGroup -Name $groupName -DisplayName $groupName -Description $groupDesc -GroupScope Global -Path $ouPath
+        Write-Host "Created new group " $groupName;
+    } 
+    for($userCount=1;$userCount -le 250; $userCount++) {
+        $userName = "BulkUser." + $ouCount.ToString("0000") + "." + $userCount.ToString("0000");
+        $userDisp = "Bulkuser "+$oucount +" " + $userCount;
+        $userDesc = "User " + $userCount + " of the OU " + $ouName;
+        $userPass = ConvertTo-SecureString -String "K2pass!" -AsPlainText -force
+        
+        New-ADUser -Name $userName -Description $userDesc -CannotChangePassword $true -DisplayName $userDisp -Enabled $true -PasswordNeverExpires $true -AccountPassword $userPass -Path $ouPath
+        Write-host "Added new user " $userName;
+        if ($lastGroup -ne "") {
+            Add-ADGroupMember -Identity $groupName -Members $userName
+        }
+    }
+}
