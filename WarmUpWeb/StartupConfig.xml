@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<startupConfigurations>
+  <configuration name="Core" default="true">
+    <!-- ServiceStatus
+      Description: used to check the status of services before continuing
+      Parameters
+        displayName: Windows service display name
+      Example: <status displayName="SharePoint Administration" status="Running" />
+    -->
+    <serviceStatus>
+      <status displayName="SharePoint Administration" status="Running" />
+      <status displayName="World Wide Web Publishing Service" status="Running" />
+    </serviceStatus>
+
+    <!-- URLs
+      Description: used to execute web request to the URL forcing a JIT
+      Parameters
+        enabled {true, false}: used to determine if the URL should be requested when $warmup=true
+        category: used to group URLs together
+        path: used as the resource that will be requested
+      Example: <url enabled="true" category="SharePoint - Portal" path="http://portal.denallix.com" />
+    -->
+    <urls>
+      <!-- SharePoint - Portal -->
+      <url enabled="true" category="SharePoint - Portal" path="https://portal.denallix.com" />
+      <url enabled="true" category="SharePoint - Developer" path="https://portal.denallix.com/sites/dev" />
+      <url enabled="false" category="SharePoint - BI" path="https://portal.denallix.com/sites/bi" />
+      <url enabled="false" category="SharePoint - Search" path="https://portal.denallix.com/sites/search" />
+      <url enabled="false" category="SharePoint - My Site" path="https://mysite.denallix.com" />
+      <!-- SharePoint Admin -->
+      <url enabled="true" category="SharePoint - Admin" path="http://dlx:44544/default.aspx" />
+      <!-- SharePoint - Portal (Claims) - can't do without passing credentials in PowerShell - not worth it -->
+      <url enabled="true" category="SharePoint - Portal (Claims)" path="https://claims.denallix.com:444" />
+      <!-- CRM -->
+      <url enabled="true" category="CRM" path="https://crm.denallix.com/Denallix/main.aspx" />
+      <url enabled="true" category="CRM" path="https://crm.denallix.com/XRMServices/2011/Discovery.svc?wsdl" />
+      <url enabled="true" category="CRM" path="https://crm.denallix.com/Denallix/XRMServices/2011/Organization.svc?wsdl" />
+      <!-- OWA -->
+      <url enabled="false" category="Exchange - Admin" path="https://dlx.denallix.com/ecp/default.aspx" />
+      <url enabled="true" category="Exchange - EWS" path="https://mail.denallix.com/ews/exchange.asmx" />
+      <url enabled="true" category="Exchange - OWA" path="https://mail.denallix.com/owa/auth/logon.aspx" />
+      <!-- K2 -->
+      <url enabled="true" category="K2" path="https://k2.denallix.com/designer/default.aspx" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com/workspace/Navigation/Navigation.aspx" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com/K2Services/WCF.svc" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com:8888/SmartObjectServices/endpoints/endpoints.xml" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com/Identity/sts/Windows" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com/Identity/sts/Forms" />
+    </urls>
+  </configuration>
+</startupConfigurations>
