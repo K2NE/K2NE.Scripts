@@ -2,7 +2,8 @@
 # On Denallix, make a 'BulkUsers' OU. Then run the below - should be enough.
 
 import-module ActiveDirectory
-
+# Create target OU:
+NEW-ADOrganizationalUnit “BulkUsers” –path “DC=DENALLIX,DC=COM”
 
 for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
     $ouName = "BulkUsers" + $ouCount.ToString("0000")
