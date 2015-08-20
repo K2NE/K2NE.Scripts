@@ -1,8 +1,10 @@
 # Use at own risk :)
-# On Denallix, make a 'BulkUsers' OU. Then run the below - should be enough.
+# Parameters set to work on Denallix VMs, and 'BulkUsers' OU will be created automatically. 
+# For other environments adjust cmdlets parameters appropriately.
 
 import-module ActiveDirectory
-
+# Create target OU:
+NEW-ADOrganizationalUnit “BulkUsers” –path “DC=DENALLIX,DC=COM”
 
 for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
     $ouName = "BulkUsers" + $ouCount.ToString("0000")
