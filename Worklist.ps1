@@ -11,7 +11,7 @@ $wl = $k2con.OpenWorklist($wlc);
 
 Write-Host "Total amount of workitems: " $wl.TotalCount
 if ( $wl.TotalCount -gt 0) {
-    Write-Host 
+
     foreach ($wli in $wl) {
         write-host  $wli.ProcessInstance.ID, $wli.Data, $wli.AllocatedUser, $wli.Status
     }
