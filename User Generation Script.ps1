@@ -1,10 +1,16 @@
 # Use at own risk :)
 # On Denallix, make a 'BulkUsers' OU. Then run the below - should be enough.
 
-import-module ActiveDirectory
+# Specify number of users and OUs to be created below
+$Num_of_Users= 250
+$Num_of_OU= 250
+
+if (-not (Get-Module -Name "ActiveDirectory")) {
+    import-module ActiveDirectory
+}
 
 
-for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
+for ($ouCount=1;$ouCount -le $Num_of_OU; $ouCount++)  {
     $ouName = "BulkUsers" + $ouCount.ToString("0000")
     $lastGroup = "";
     New-ADOrganizationalUnit -Name $ouName -Path "OU=BulkUsers,DC=DENALLIX,DC=COM" -ProtectedFromAccidentalDeletion $false
@@ -17,7 +23,7 @@ for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
         New-ADGroup -Name $groupName -DisplayName $groupName -Description $groupDesc -GroupScope Global -Path $ouPath
         Write-Host "Created new group " $groupName;
     } 
-    for($userCount=1;$userCount -le 250; $userCount++) {
+    for($userCount=1;$userCount -le $Num_of_Users; $userCount++) {
         $userName = "BulkUser." + $ouCount.ToString("0000") + "." + $userCount.ToString("0000");
         $userDisp = "Bulkuser "+$oucount +" " + $userCount;
         $userDesc = "User " + $userCount + " of the OU " + $ouName;
