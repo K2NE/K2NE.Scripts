@@ -2,11 +2,16 @@
 # Parameters set to work on Denallix VMs, and 'BulkUsers' OU will be created automatically. 
 # For other environments adjust cmdlets parameters appropriately.
 
+# Specify number of users and OUs to be created below
+$Num_of_Users= 250
+$Num_of_OU= 250
+
 import-module ActiveDirectory
 # Create target OU:
 NEW-ADOrganizationalUnit “BulkUsers” –path “DC=DENALLIX,DC=COM”
 
-for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
+# Begin users generation process
+for ($ouCount=1;$ouCount -le $Num_of_OU; $ouCount++)  {
     $ouName = "BulkUsers" + $ouCount.ToString("0000")
     $lastGroup = "";
     New-ADOrganizationalUnit -Name $ouName -Path "OU=BulkUsers,DC=DENALLIX,DC=COM" -ProtectedFromAccidentalDeletion $false
@@ -19,7 +24,7 @@ for ($ouCount=1;$ouCount -le 250; $ouCount++)  {
         New-ADGroup -Name $groupName -DisplayName $groupName -Description $groupDesc -GroupScope Global -Path $ouPath
         Write-Host "Created new group " $groupName;
     } 
-    for($userCount=1;$userCount -le 250; $userCount++) {
+    for($userCount=1;$userCount -le $Num_of_Users; $userCount++) {
         $userName = "BulkUser." + $ouCount.ToString("0000") + "." + $userCount.ToString("0000");
         $userDisp = "Bulkuser "+$oucount +" " + $userCount;
         $userDesc = "User " + $userCount + " of the OU " + $ouName;
