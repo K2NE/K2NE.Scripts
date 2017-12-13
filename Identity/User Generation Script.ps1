@@ -11,8 +11,11 @@ if (-not (Get-Module -Name "ActiveDirectory")) {
     import-module ActiveDirectory
 }
 
-# Create target OU:
+# Create target OU if not exist:
+$ou="CN=BulkUsers,DC=denallix,DC=com"
+if ((Test-Path $ou) -eq "False"){
 NEW-ADOrganizationalUnit “BulkUsers” –path “DC=DENALLIX,DC=COM”
+}
 
 # Begin users generation process
 for ($ouCount=1;$ouCount -le $Num_of_OU; $ouCount++)  {
