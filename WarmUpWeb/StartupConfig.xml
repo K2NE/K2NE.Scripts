@@ -46,6 +46,17 @@
       <url enabled="true" category="K2" path="https://k2.denallix.com:8888/SmartObjectServices/endpoints/endpoints.xml" />
       <url enabled="true" category="K2" path="https://k2.denallix.com/Identity/sts/Windows" />
       <url enabled="true" category="K2" path="https://k2.denallix.com/Identity/sts/Forms" />
+      <url enabled="true" category="K2" path="https://k2.denallix.com/runtime/warmup.aspx" />
     </urls>
+
+    <!-- ignoreServiceAutostart
+      Description: used to avoid starting of services
+      Parameters
+        displayName: Windows service display name
+      Example: <service displayName="SharePoint Search Host Controller" />
+    -->
+    <ignoreServiceAutostart>
+      <service displayName="SharePoint Search Host Controller" />
+    </ignoreServiceAutostart>
   </configuration>
 </startupConfigurations>
